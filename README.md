@@ -9,23 +9,12 @@
 
 </div>
 
----
-
 <p align="center"> Create your JavaScript app with ease.
     <br> 
 </p>
 
-## 📝 Table of Contents
 
-- [📝 Table of Contents](#-table-of-contents)
-- [🧐 About ](#-about-)
-- [Prerequisites](#prerequisites)
-- [🎈 Usage ](#-usage-)
-- [⛏️ Built Using ](#️-built-using-)
-- [✍️ Authors ](#️-authors-)
-- [🎉 Acknowledgements ](#-acknowledgements-)
-
-## 🧐 About <a name = "about"></a>
+## Motivation
 
 Create your JavaScript app with ease.
 
@@ -35,24 +24,24 @@ You need:
 
 - Nodejs(v18+)
 
-## 🎈 Usage <a name="usage"></a>
+## Usage
 
 ```shell
 pnpm create kiwi
 ```
 
-## ⛏️ Built Using <a name = "built_using"></a>
+## Built Using
 
 - [NodeJs](https://nodejs.org/en/) - Server Environment
 - [prompts](https://www.npmjs.com/package/prompts) - TUI components.
 - [unbuild](https://github.com/unjs/unbuild) - Bundler
 
-## ✍️ Authors <a name = "authors"></a>
+## Author
 
 - [@akarachen](https://github.com/akarachen) - Idea & Initial work
 
 See also the list of [contributors](https://github.com/akarachen/create-kiwi/contributors) who participated in this project.
 
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
+## Acknowledgements
 
 - Inspired by [suemor](https://github.com/suemor233/create-project)
