@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "lib": ["DOM", "ES2015"],
+        "allowSyntheticDefaultImports": true,
+        "target": "ES2020",
+        "moduleResolution": "node"
+    }
+}

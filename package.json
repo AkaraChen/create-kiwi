@@ -1,0 +1,36 @@
+{
+  "name": "create-kiwi",
+  "version": "0.0.0",
+  "description": "Create your JavaScript app with ease.",
+  "type": "module",
+  "bin": {
+    "create-kiwi": "./bin/index.js"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "start": "create-kiwi",
+    "dev": "pnpm build && pnpm start"
+  },
+  "keywords": [
+    "starter"
+  ],
+  "author": "AkaraChen",
+  "license": "ISC",
+  "files": [
+    "dist",
+    "bin"
+  ],
+  "devDependencies": {
+    "@types/prompts": "^2.4.2",
+    "@types/rimraf": "^3.0.2",
+    "eslint": "^8.30.0",
+    "eslint-config-akrc": "^0.0.11",
+    "unbuild": "^1.0.2"
+  },
+  "dependencies": {
+    "consola": "^2.15.3",
+    "execa": "^6.1.0",
+    "prompts": "^2.4.2",
+    "rimraf": "^3.0.2"
+  }
+}

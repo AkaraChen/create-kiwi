@@ -1,0 +1,9 @@
+{
+    "extends": [
+        "akrc"
+    ],
+    "ignorePatterns": ["dist/**"],
+    "rules": {
+        "unicorn/no-process-exit": "off"
+    }
+}
