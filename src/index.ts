@@ -37,6 +37,7 @@ async function main() {
             { title: 'Vite Vue', value: 'vite-vue-starter' },
             { title: 'Webpack React', value: 'webpack-react-starter' },
             { title: 'Package', value: 'package-starter' },
+            { title: 'Package Rollup', value: 'package-starter-rollup' },
             { title: 'tRPC', value: 'trpc-starter' }
         ]
     });
