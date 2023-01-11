@@ -8,6 +8,11 @@ import rimraf from 'rimraf';
 
 const cwd = process.cwd();
 
+function onCancel() {
+    consola.error('Operation Canceled.');
+    process.exit(1);
+}
+
 async function main() {
     await execa('git', ['-v']).catch(() => {
         boom('Git not found in your machine.');
@@ -26,7 +31,7 @@ async function main() {
             }
             return true;
         }
-    });
+    }, { onCancel });
     const directory = path.resolve(cwd, dir);
     if (!fs.existsSync(directory)) rimraf.sync(directory);
     const { template } = await prompts({
@@ -40,7 +45,7 @@ async function main() {
             { title: 'Package Rollup', value: 'package-starter-rollup' },
             { title: 'tRPC', value: 'trpc-starter' }
         ]
-    });
+    }, { onCancel });
     const repo = `https://github.com/akarachen/${template}.git`;
     await execa('git', ['clone', repo, dir]).catch(() => {
         boom('Clone repo failed.');
