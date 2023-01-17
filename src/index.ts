@@ -3,15 +3,13 @@ import consola from 'consola';
 import fs from 'node:fs';
 import path from 'node:path';
 import { execa } from 'execa';
-import { boom } from './util';
+import {
+    boom, onCancel, getPackageManager, getInstallScript
+} from './util';
 import rimraf from 'rimraf';
 
 const cwd = process.cwd();
-
-function onCancel() {
-    consola.error('Operation Canceled.');
-    process.exit(1);
-}
+const packageManager = getPackageManager();
 
 async function main() {
     await execa('git', ['-v']).catch(() => {
@@ -51,6 +49,10 @@ async function main() {
         boom('Clone repo failed.');
     });
     rimraf.sync(path.resolve(directory, '.git'));
+    consola.success(`Initialize project ${dir} success. Now run:\n`);
+    console.log(`   cd ${dir}`);
+    console.log(`   ${getInstallScript(packageManager)}`);
+    console.log(`   ${packageManager} run dev`);
 }
 
 await main();

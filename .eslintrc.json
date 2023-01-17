@@ -2,8 +2,17 @@
     "extends": [
         "akrc"
     ],
-    "ignorePatterns": ["dist/**"],
+    "ignorePatterns": [
+        "dist/**"
+    ],
     "rules": {
-        "unicorn/no-process-exit": "off"
+        "unicorn/no-process-exit": "off",
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ]
     }
 }
