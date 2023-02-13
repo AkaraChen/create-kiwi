@@ -1,12 +1,12 @@
-import prompts from 'prompts';
 import consola from 'consola';
+import { execa } from 'execa';
 import fs from 'node:fs';
 import path from 'node:path';
-import { execa } from 'execa';
-import {
-    boom, onCancel, getPackageManager, getInstallScript
-} from './util';
+import prompts from 'prompts';
 import rimraf from 'rimraf';
+import {
+    boom, getInstallScript, getPackageManager, onCancel
+} from './util';
 
 const cwd = process.cwd();
 const packageManager = getPackageManager();
@@ -41,7 +41,8 @@ async function main() {
             { title: 'Webpack React', value: 'webpack-react-starter' },
             { title: 'Package', value: 'package-starter' },
             { title: 'Package Rollup', value: 'package-starter-rollup' },
-            { title: 'tRPC', value: 'trpc-starter' }
+            { title: 'tRPC', value: 'trpc-starter' },
+            { title: 'unplugin', value: 'starter-unplugin' }
         ]
     }, { onCancel });
     const repo = `https://github.com/akarachen/${template}.git`;

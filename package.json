@@ -9,7 +9,8 @@
   "scripts": {
     "build": "unbuild",
     "start": "create-kiwi",
-    "dev": "pnpm build && pnpm start"
+    "dev": "pnpm build && pnpm start",
+    "lint": "eslint . --fix"
   },
   "keywords": [
     "starter"
