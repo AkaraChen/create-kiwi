@@ -1,3 +1,17 @@
+## [0.0.4](https://github.com/AkaraChen/create-kiwi/compare/0.0.3...0.0.4) (2023-02-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency execa to v7 ([cbb70cf](https://github.com/AkaraChen/create-kiwi/commit/cbb70cfb5aa3a2b5c7a58c8cf3494a1866bb0777))
+
+
+### Features
+
+* new template ([cef10bb](https://github.com/AkaraChen/create-kiwi/commit/cef10bb4e1e271245f78ce35b8c661deb350ead2))
+
+
+
 ## [0.0.3](https://github.com/AkaraChen/create-kiwi/compare/0.0.2...0.0.3) (2023-01-17)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "create-kiwi",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Create your JavaScript app with ease.",
   "type": "module",
   "bin": {
