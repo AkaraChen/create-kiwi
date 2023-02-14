@@ -1,3 +1,12 @@
+# [0.1.0](https://github.com/AkaraChen/create-kiwi/compare/0.0.4...0.1.0) (2023-02-14)
+
+
+### Features
+
+* use `@clack/prompts` ([0701052](https://github.com/AkaraChen/create-kiwi/commit/0701052bd28c40b90dc29b4e6237e7e367f01cfb))
+
+
+
 ## [0.0.4](https://github.com/AkaraChen/create-kiwi/compare/0.0.3...0.0.4) (2023-02-13)
 
 
