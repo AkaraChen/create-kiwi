@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+import { isCancel } from '@clack/prompts';
 import consola from 'consola';
 
 export const boom = (message: string) => {
@@ -7,9 +7,10 @@ export const boom = (message: string) => {
     process.exit(1);
 };
 
-export function onCancel() {
-    consola.error('Operation Canceled.');
-    process.exit(1);
+export function onCancel(signal: any) {
+    if (isCancel(signal)) {
+        boom('Operation Canceled.')
+    }
 }
 
 enum PackageManager {
@@ -33,13 +34,13 @@ export function getPackageManager(): PackageManager {
 export function getInstallScript(packageManager: PackageManager) {
     switch (packageManager) {
         case PackageManager.pnpm: {
-            return 'pnpm install';
+            return 'install';
         }
         case PackageManager.yarn: {
-            return 'yarn';
+            return '';
         }
         default: {
-            return 'npm install';
+            return 'install';
         }
     }
 }
