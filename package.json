@@ -28,7 +28,7 @@
     "unbuild": "^1.0.2"
   },
   "dependencies": {
-    "@clack/prompts": "^0.4.0",
+    "@clack/prompts": "^0.6.0",
     "consola": "^2.15.3",
     "execa": "^7.0.0",
     "rimraf": "^4.0.0"
