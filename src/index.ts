@@ -1,4 +1,7 @@
-import { confirm, intro, outro, select, spinner, text } from '@clack/prompts';
+/* eslint-disable unicorn/prevent-abbreviations */
+import {
+    confirm, intro, outro, select, spinner, text
+} from '@clack/prompts';
 import consola from 'consola';
 import { execa } from 'execa';
 import fs from 'node:fs';
@@ -15,7 +18,7 @@ await execa('git', ['-v']).catch(() => {
     boom('Git not found in your machine.');
 });
 
-intro(`create-kiwi`);
+intro('create-kiwi');
 
 const dir = await text({
     message: 'Please input project name.',
@@ -26,7 +29,7 @@ const dir = await text({
         if (fs.readdirSync(directory)) {
             return `${directory} is already existed.`;
         }
-    },
+    }
 }) as string;
 onCancel(dir);
 
@@ -40,7 +43,8 @@ const template = await select({
         { title: 'Package', value: 'package-starter' },
         { title: 'Package Rollup', value: 'package-starter-rollup' },
         { title: 'tRPC', value: 'trpc-starter' },
-        { title: 'unplugin', value: 'starter-unplugin' }
+        { title: 'unplugin', value: 'starter-unplugin' },
+        { title: 'React Component Library', value: 'react-component-starter' }
     ]
 }) as string;
 onCancel(template);
@@ -62,9 +66,9 @@ if (install) {
             packageManager,
             [getInstallScript(packageManager)],
             { cwd: directory, stdio: 'ignore' }
-        )
+        );
     } catch {
-        boom(`Install failed.`);
+        boom('Install failed.');
     } finally {
         spin.stop('Install success.');
     }

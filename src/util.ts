@@ -9,7 +9,7 @@ export const boom = (message: string) => {
 
 export function onCancel(signal: any) {
     if (isCancel(signal)) {
-        boom('Operation Canceled.')
+        boom('Operation Canceled.');
     }
 }
 
