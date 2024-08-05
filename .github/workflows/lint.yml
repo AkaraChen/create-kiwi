@@ -18,7 +18,7 @@ jobs:
         run: |
           pnpm install
       - name: Run lint
-        run: pnpm lint
+        run: pnpm check
       - name: Commit files
         id: commit
         continue-on-error: true
