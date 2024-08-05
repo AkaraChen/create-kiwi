@@ -1,6 +1,6 @@
 {
-	"prePublish": "build",
-	"changelog": true,
-	"publish": true,
-	"withTag": true
+    "prePublish": "build",
+    "changelog": true,
+    "publish": true,
+    "withTag": true
 }

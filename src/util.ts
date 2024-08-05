@@ -1,11 +1,11 @@
 import { isCancel } from '@clack/prompts';
 import consola from 'consola';
 
-export const boom = (message: string) => {
+export function boom(message: string) {
     const error = new Error(message);
     consola.error(error);
     process.exit(1);
-};
+}
 
 export function onCancel(signal: any) {
     if (isCancel(signal)) {
@@ -16,7 +16,7 @@ export function onCancel(signal: any) {
 enum PackageManager {
     yarn = 'yarn',
     pnpm = 'pnpm',
-    npm = 'npm'
+    npm = 'npm',
 }
 
 export function getPackageManager(): PackageManager {
@@ -24,7 +24,8 @@ export function getPackageManager(): PackageManager {
     if (userAgent) {
         if (userAgent.startsWith('yarn')) {
             return PackageManager.yarn;
-        } if (userAgent.startsWith('pnpm')) {
+        }
+        if (userAgent.startsWith('pnpm')) {
             return PackageManager.pnpm;
         }
     }

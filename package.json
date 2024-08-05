@@ -1,36 +1,31 @@
 {
-  "name": "create-kiwi",
-  "version": "0.1.1",
-  "description": "Create your JavaScript app with ease.",
-  "type": "module",
-  "bin": {
-    "create-kiwi": "./bin/index.js"
-  },
-  "scripts": {
-    "build": "unbuild",
-    "start": "create-kiwi",
-    "dev": "pnpm build && pnpm start",
-    "lint": "eslint . --fix"
-  },
-  "keywords": [
-    "starter"
-  ],
-  "author": "AkaraChen",
-  "license": "ISC",
-  "files": [
-    "dist",
-    "bin"
-  ],
-  "devDependencies": {
-    "@types/rimraf": "^3.0.2",
-    "eslint": "^8.30.0",
-    "eslint-config-akrc": "^1.0.0",
-    "unbuild": "^1.0.2"
-  },
-  "dependencies": {
-    "@clack/prompts": "^0.6.0",
-    "consola": "^2.15.3",
-    "execa": "^7.0.0",
-    "rimraf": "^4.0.0"
-  }
+    "name": "create-kiwi",
+    "version": "0.1.1",
+    "description": "Create your JavaScript app with ease.",
+    "type": "module",
+    "bin": {
+        "create-kiwi": "./bin/index.js"
+    },
+    "scripts": {
+        "build": "unbuild",
+        "start": "create-kiwi",
+        "dev": "pnpm build && pnpm start",
+        "check": "biome check . --write"
+    },
+    "keywords": ["starter"],
+    "author": "AkaraChen",
+    "license": "ISC",
+    "files": ["dist", "bin"],
+    "devDependencies": {
+        "@biomejs/biome": "^1.8.3",
+        "@types/rimraf": "^3.0.2",
+        "unbuild": "^2.0.0"
+    },
+    "dependencies": {
+        "@clack/prompts": "^0.7.0",
+        "consola": "^3.2.3",
+        "execa": "^9.3.0",
+        "rimraf": "^6.0.1"
+    },
+    "packageManager": "pnpm@9.6.0"
 }

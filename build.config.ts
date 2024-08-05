@@ -1,12 +1,10 @@
 import { defineBuildConfig } from 'unbuild';
 
 export default defineBuildConfig({
-    entries: [
-        './src/index'
-    ],
+    entries: ['./src/index'],
     rollup: {
         esbuild: {
-            target: 'es2022'
-        }
-    }
+            target: 'es2022',
+        },
+    },
 });
