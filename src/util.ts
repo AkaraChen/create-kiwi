@@ -1,16 +1,9 @@
-import { isCancel } from '@clack/prompts';
 import consola from 'consola';
 
 export function boom(message: string) {
     const error = new Error(message);
     consola.error(error);
     process.exit(1);
-}
-
-export function onCancel(signal: any) {
-    if (isCancel(signal)) {
-        boom('Operation Canceled.');
-    }
 }
 
 enum PackageManager {

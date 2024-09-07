@@ -1,11 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
-/* eslint-disable unicorn/prevent-abbreviations */
-import { confirm, intro, outro, select, spinner, text } from '@clack/prompts';
-import consola from 'consola';
+import enquirer from 'enquirer';
 import { execa } from 'execa';
-import rimraf from 'rimraf';
-import { boom, getInstallScript, getPackageManager, onCancel } from './util';
+import * as rimraf from 'rimraf';
+import { boom, getInstallScript, getPackageManager } from './util';
 
 const cwd = process.cwd();
 const packageManager = getPackageManager();
@@ -14,49 +12,58 @@ await execa('git', ['-v']).catch(() => {
     boom('Git not found in your machine.');
 });
 
-intro('create-kiwi');
-
-const dir = (await text({
-    message: 'Please input project name.',
-    validate: (value: string) => {
-        const directory = path.resolve(cwd, value);
-        consola.log(directory);
-        if (!fs.existsSync(directory)) return;
-        if (fs.readdirSync(directory)) {
-            return `${directory} is already existed.`;
-        }
+const inputs = await enquirer.prompt<{
+    dir: string;
+    template: string;
+}>([
+    {
+        type: 'input',
+        name: 'dir',
+        message: 'Please input project name.',
+        initial: 'my-project',
+        validate: (value: string) => {
+            const directory = path.resolve(cwd, value);
+            if (!fs.existsSync(directory)) {
+                return true;
+            }
+            if (fs.readdirSync(directory).length > 0) {
+                console.log(`${directory} is not empty.`);
+                return `${directory} is already existed.`;
+            }
+        },
     },
-})) as string;
-onCancel(dir);
+    {
+        type: 'select',
+        name: 'template',
+        message: 'Pick templates',
+        choices: [
+            'package-starter',
+            'react-component-starter',
+            'turborepo-nextjs-hono-starter',
+            'starter-cli',
+        ],
+    },
+]);
+
+const { dir, template } = inputs;
 
 const directory = path.resolve(cwd, dir);
-if (!fs.existsSync(directory)) rimraf.sync(directory);
-const template = (await select({
-    message: 'Pick templates',
-    options: [
-        { title: 'Package', value: 'package-starter' },
-        { title: 'React component library', value: 'react-component-starter' },
-        {
-            title: 'Turborepo nextjs hono starter',
-            value: 'turborepo-nextjs-hono-starter',
-        },
-        { title: 'CLI', value: 'starter-cli' },
-    ],
-})) as string;
-onCancel(template);
 
 const repo = `https://github.com/akarachen/${template}.git`;
 await execa('git', ['clone', repo, dir]).catch(() => {
+    console.log(`git clone ${repo} ${dir}`);
     boom('Clone repo failed.');
 });
 
-const install = (await confirm({
+const { install } = await enquirer.prompt<{
+    install: boolean;
+}>({
+    type: 'confirm',
     message: 'Would you like to install deps?',
-})) as boolean;
-onCancel(install);
+    name: 'install',
+});
+
 if (install) {
-    const spin = spinner();
-    spin.start(`Installing via ${packageManager}`);
     try {
         await execa(packageManager, [getInstallScript(packageManager)], {
             cwd: directory,
@@ -64,10 +71,7 @@ if (install) {
         });
     } catch {
         boom('Install failed.');
-    } finally {
-        spin.stop('Install success.');
     }
 }
 
 rimraf.sync(path.resolve(directory, '.git'));
-outro(`Initialize project ${dir} success.`);
