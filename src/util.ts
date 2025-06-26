@@ -1,6 +1,6 @@
 import consola from 'consola';
 
-export function boom(message: string) {
+export function boom(message: string): never {
     const error = new Error(message);
     consola.error(error);
     process.exit(1);

@@ -1,78 +1,76 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import enquirer from 'enquirer';
 import { execa } from 'execa';
-import * as rimraf from 'rimraf';
-import { boom, getInstallScript, getPackageManager } from './util';
+import { ExecTemplating } from './exec-templating';
+import { GitCloneTemplating } from './git-clone-templating';
+import type { TemplatingStrategy } from './templating-strategy';
+import { boom } from './util';
 
 const cwd = process.cwd();
-const packageManager = getPackageManager();
 
 await execa('git', ['-v']).catch(() => {
     boom('Git not found in your machine.');
 });
 
+const templates: Array<{
+    message: string;
+    name: string;
+    strategy: TemplatingStrategy;
+}> = [
+    {
+        message: 'package-starter',
+        name: 'package-starter',
+        strategy: new GitCloneTemplating('Simple Package', 'package-starter'),
+    },
+    {
+        message: 'react-component-starter',
+        name: 'react-component-starter',
+        strategy: new GitCloneTemplating(
+            'React Component Library',
+            'react-component-starter',
+        ),
+    },
+    {
+        message: 'turborepo-nextjs-hono-starter',
+        name: 'turborepo-nextjs-hono-starter',
+        strategy: new GitCloneTemplating(
+            'Turborepo Next.js Hono Monorepo',
+            'turborepo-nextjs-hono-starter',
+        ),
+    },
+    {
+        message: 'nextjs-shadcn-template',
+        name: 'nextjs-shadcn-template',
+        strategy: new GitCloneTemplating(
+            'Next.js + ShadCN UI',
+            'nextjs-shadcn-template',
+        ),
+    },
+    {
+        message: 'effect-ts',
+        name: 'effect-ts',
+        strategy: new ExecTemplating('Effect CLI App', 'pnpx', [
+            'create-effect-app',
+        ]),
+    },
+];
+
 const inputs = await enquirer.prompt<{
-    dir: string;
     template: string;
 }>([
-    {
-        type: 'input',
-        name: 'dir',
-        message: 'Please input project name.',
-        initial: 'my-project',
-        validate: (value: string) => {
-            const directory = path.resolve(cwd, value);
-            if (!fs.existsSync(directory)) {
-                return true;
-            }
-            if (fs.readdirSync(directory).length > 0) {
-                console.log(`${directory} is not empty.`);
-                return `${directory} is already existed.`;
-            }
-        },
-    },
     {
         type: 'select',
         name: 'template',
         message: 'Pick templates',
-        choices: [
-            'package-starter',
-            'react-component-starter',
-            'turborepo-nextjs-hono-starter',
-            'starter-cli',
-            'nextjs-shadcn-template',
-        ],
+        choices: templates.map((t) => ({ message: t.message, name: t.name })),
     },
 ]);
 
-const { dir, template } = inputs;
+const { template } = inputs;
 
-const directory = path.resolve(cwd, dir);
+const selectedTemplate = templates.find((t) => t.name === template);
 
-const repo = `https://github.com/akarachen/${template}.git`;
-await execa('git', ['clone', repo, dir]).catch(() => {
-    console.log(`git clone ${repo} ${dir}`);
-    boom('Clone repo failed.');
-});
-
-const { install } = await enquirer.prompt<{
-    install: boolean;
-}>({
-    type: 'confirm',
-    message: 'Would you like to install deps?',
-    name: 'install',
-});
-
-if (install) {
-    try {
-        await execa(packageManager, [getInstallScript(packageManager)], {
-            cwd: directory,
-            stdio: 'ignore',
-        });
-    } catch {
-        boom('Install failed.');
-    }
+if (!selectedTemplate) {
+    boom('Invalid template selected.');
 }
 
-rimraf.sync(path.resolve(directory, '.git'));
+await selectedTemplate.strategy.create(cwd);
