@@ -10,7 +10,8 @@
         "build": "unbuild",
         "start": "create-kiwi",
         "dev": "pnpm build && pnpm start",
-        "check": "biome check . --write"
+        "check": "biome check . --write",
+        "prepublishOnly": "pnpm build"
     },
     "keywords": ["starter"],
     "author": "AkaraChen",
