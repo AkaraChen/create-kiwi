@@ -4,7 +4,7 @@
     "description": "Create your JavaScript app with ease.",
     "type": "module",
     "bin": {
-        "create-kiwi": "./bin/index.js"
+        "create-kiwi": "bin/index.js"
     },
     "scripts": {
         "build": "unbuild",
