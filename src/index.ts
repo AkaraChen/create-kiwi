@@ -41,6 +41,7 @@ const inputs = await enquirer.prompt<{
             'react-component-starter',
             'turborepo-nextjs-hono-starter',
             'starter-cli',
+            'nextjs-shadcn-template',
         ],
     },
 ]);
