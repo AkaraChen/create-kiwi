@@ -1,68 +1,23 @@
-import enquirer from 'enquirer';
-import { execa } from 'execa';
-import { ExecTemplating } from './exec-templating';
-import { GitCloneTemplating } from './git-clone-templating';
-import type { TemplatingStrategy } from './templating-strategy';
-import { boom } from './util';
+import enquirer from "enquirer";
+import { execa } from "execa";
+import { boom } from "./util";
+import { templates } from "./core/templates";
 
 const cwd = process.cwd();
 
-await execa('git', ['-v']).catch(() => {
-    boom('Git not found in your machine.');
+await execa("git", ["-v"]).catch(() => {
+  boom("Git not found in your machine.");
 });
 
-const templates: Array<{
-    message: string;
-    name: string;
-    strategy: TemplatingStrategy;
-}> = [
-    {
-        message: 'package-starter',
-        name: 'package-starter',
-        strategy: new GitCloneTemplating('Simple Package', 'package-starter'),
-    },
-    {
-        message: 'react-component-starter',
-        name: 'react-component-starter',
-        strategy: new GitCloneTemplating(
-            'React Component Library',
-            'react-component-starter',
-        ),
-    },
-    {
-        message: 'turborepo-nextjs-hono-starter',
-        name: 'turborepo-nextjs-hono-starter',
-        strategy: new GitCloneTemplating(
-            'Turborepo Next.js Hono Monorepo',
-            'turborepo-nextjs-hono-starter',
-        ),
-    },
-    {
-        message: 'nextjs-shadcn-template',
-        name: 'nextjs-shadcn-template',
-        strategy: new GitCloneTemplating(
-            'Next.js + ShadCN UI',
-            'nextjs-shadcn-template',
-        ),
-    },
-    {
-        message: 'effect-ts',
-        name: 'effect-ts',
-        strategy: new ExecTemplating('Effect CLI App', 'pnpx', [
-            'create-effect-app',
-        ]),
-    },
-];
-
 const inputs = await enquirer.prompt<{
-    template: string;
+  template: string;
 }>([
-    {
-        type: 'select',
-        name: 'template',
-        message: 'Pick templates',
-        choices: templates.map((t) => ({ message: t.message, name: t.name })),
-    },
+  {
+    type: "select",
+    name: "template",
+    message: "Pick templates",
+    choices: templates.map((t) => ({ message: t.message, name: t.name })),
+  },
 ]);
 
 const { template } = inputs;
@@ -70,7 +25,7 @@ const { template } = inputs;
 const selectedTemplate = templates.find((t) => t.name === template);
 
 if (!selectedTemplate) {
-    boom('Invalid template selected.');
+  boom("Invalid template selected.");
 }
 
 await selectedTemplate.strategy.create(cwd);
