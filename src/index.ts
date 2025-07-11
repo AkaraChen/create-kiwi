@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import enquirer from 'enquirer';
 import { execa } from 'execa';
 import { templates } from './core/templates';
