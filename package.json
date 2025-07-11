@@ -14,7 +14,11 @@
         "prepublishOnly": "pnpm build"
     },
     "keywords": ["starter"],
-    "author": "AkaraChen",
+    "author": {
+        "name": "AkaraChen",
+        "email": "akarachen@outlook.com",
+        "url": "https://github.com/AkaraChen"
+    },
     "license": "ISC",
     "files": ["dist", "bin"],
     "devDependencies": {
@@ -28,5 +32,28 @@
         "execa": "^9.3.0",
         "rimraf": "^6.0.1"
     },
-    "packageManager": "pnpm@9.6.0"
+    "packageManager": "pnpm@9.6.0",
+    "homepage": "https://github.com/akarachen/create-kiwi",
+    "bugs": {
+        "url": "https://github.com/akarachen/create-kiwi/issues",
+        "email": "akarachen@outlook.com"
+    },
+    "contributors": [
+        {
+            "name": "AkaraChen",
+            "email": "akarachen@outlook.com",
+            "url": "https://github.com/AkaraChen"
+        }
+    ],
+    "maintainers": [
+        {
+            "name": "AkaraChen",
+            "email": "akarachen@outlook.com",
+            "url": "https://github.com/AkaraChen"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/akarachen/create-kiwi.git"
+    }
 }

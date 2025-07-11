@@ -7,12 +7,10 @@ import { boom, getInstallScript, getPackageManager } from '../util';
 import type { TemplatingStrategy } from './interface';
 
 export class GitCloneTemplating implements TemplatingStrategy {
-    name: string;
-    private template: string;
+    private url: string;
 
-    constructor(name: string, template: string) {
-        this.name = name;
-        this.template = template;
+    constructor(url: string) {
+        this.url = url;
     }
 
     async create(cwd: string): Promise<void> {
@@ -36,9 +34,8 @@ export class GitCloneTemplating implements TemplatingStrategy {
         });
 
         const directory = path.resolve(cwd, dir);
-        const repo = `https://github.com/akarachen/${this.template}.git`;
-        await execa('git', ['clone', repo, dir]).catch(() => {
-            console.log(`git clone ${repo} ${dir}`);
+        await execa('git', ['clone', this.url, dir]).catch(() => {
+            console.log(`git clone ${this.url} ${dir}`);
             boom('Clone repo failed.');
         });
         rimraf.sync(path.resolve(directory, '.git'));

@@ -3,12 +3,10 @@ import { boom } from '../util';
 import type { TemplatingStrategy } from './interface';
 
 export class ExecTemplating implements TemplatingStrategy {
-    name: string;
     private command: string;
     private args: string[];
 
-    constructor(name: string, command: string, args: string[] = []) {
-        this.name = name;
+    constructor(command: string, args: string[] = []) {
         this.command = command;
         this.args = args;
     }
