@@ -40,6 +40,8 @@ export const templates: Array<{
     {
         message: 'nestjs-betterauth-prisma-template',
         name: 'nestjs-betterauth-prisma-template',
-        strategy: new GitHubCloneTemplating('nestjs-betterauth-prisma-template'),
+        strategy: new GitHubCloneTemplating(
+            'nestjs-betterauth-prisma-template',
+        ),
     },
 ];
