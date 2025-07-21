@@ -37,4 +37,9 @@ export const templates: Array<{
         name: 'mui-toolpad-nextjs',
         strategy: new GitHubCloneTemplating('toolpad-next-template'),
     },
+    {
+        message: 'nestjs-betterauth-prisma-template',
+        name: 'nestjs-betterauth-prisma-template',
+        strategy: new GitHubCloneTemplating('nestjs-betterauth-prisma-template'),
+    },
 ];
