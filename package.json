@@ -32,7 +32,7 @@
         "execa": "^9.3.0",
         "rimraf": "^6.0.1"
     },
-    "packageManager": "pnpm@9.6.0",
+    "packageManager": "pnpm@9.15.9",
     "homepage": "https://github.com/akarachen/create-kiwi",
     "bugs": {
         "url": "https://github.com/akarachen/create-kiwi/issues",
