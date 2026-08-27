@@ -22,7 +22,7 @@
     "license": "ISC",
     "files": ["dist", "bin"],
     "devDependencies": {
-        "@biomejs/biome": "^1.8.3",
+        "@biomejs/biome": "^2.0.0",
         "@types/rimraf": "^3.0.2",
         "unbuild": "^2.0.0"
     },
